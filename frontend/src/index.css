@@ -1,0 +1,160 @@
+/*
+ * UCHAGUZI SAFI — Global Styles
+ * ==============================
+ * Tailwind CSS base + custom utilities for Kenya's campaign finance
+ * transparency platform. Mobile-first approach reflecting 59% mobile
+ * internet penetration in Kenya.
+ *
+ * Font: Inter — excellent readability on low-resolution mobile screens.
+ */
+
+/* ── Tailwind Layers ───────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Web Fonts ─────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+/* ── Base Layer Overrides ──────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent layout shifts on mobile scroll */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+    /* Safe area insets for notched mobile devices */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Accessible focus rings in Kenya green */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-kenya-green-500;
+  }
+}
+
+/* ── Component Layer — Reusable UI Patterns ────────────────────── */
+@layer components {
+  /* Primary card container used across all 6 modules */
+  .card {
+    @apply rounded-card bg-white shadow-card p-4 sm:p-6
+           transition-shadow duration-200 hover:shadow-card-hover;
+  }
+
+  /* Kenya-green primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-lg bg-kenya-green px-4 py-2.5
+           text-sm font-semibold text-white
+           transition-colors duration-150
+           hover:bg-kenya-green-600
+           focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-kenya-green-500
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Kenya-red danger / report button (M3 Ripoti Ubadhirifu) */
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-lg bg-kenya-red px-4 py-2.5
+           text-sm font-semibold text-white
+           transition-colors duration-150
+           hover:bg-kenya-red-600
+           focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-kenya-red-500
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Ghost / outline button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-lg border-2 border-kenya-green px-4 py-2.5
+           text-sm font-semibold text-kenya-green
+           transition-colors duration-150
+           hover:bg-kenya-green-50
+           focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-kenya-green-500;
+  }
+
+  /* Compliance status badges — colours from ECF Act thresholds */
+  .badge-compliant {
+    @apply inline-flex items-center rounded-full
+           bg-green-100 px-2.5 py-0.5
+           text-xs font-medium text-status-compliant;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center rounded-full
+           bg-amber-100 px-2.5 py-0.5
+           text-xs font-medium text-status-warning;
+  }
+
+  .badge-violation {
+    @apply inline-flex items-center rounded-full
+           bg-red-100 px-2.5 py-0.5
+           text-xs font-medium text-status-violation;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center rounded-full
+           bg-blue-100 px-2.5 py-0.5
+           text-xs font-medium text-status-verified;
+  }
+
+  /* Mobile-friendly input fields */
+  .input-field {
+    @apply w-full rounded-lg border border-gray-300 bg-white
+           px-3.5 py-2.5 text-sm text-gray-900
+           placeholder:text-gray-400
+           focus:border-kenya-green-500 focus:ring-2
+           focus:ring-kenya-green-500/20 focus:outline-none
+           transition-colors duration-150;
+  }
+}
+
+/* ── Utility Layer ─────────────────────────────────────────────── */
+@layer utilities {
+  /* Kenya-green gradient for hero sections and headers */
+  .gradient-kenya {
+    background: linear-gradient(135deg, #006600 0%, #004400 100%);
+  }
+
+  /* Red accent gradient for alert banners (M5 Tahadhari) */
+  .gradient-alert {
+    background: linear-gradient(135deg, #BB0000 0%, #8B0000 100%);
+  }
+
+  /* Subtle pattern overlay for dashboard backgrounds */
+  .pattern-dots {
+    background-image: radial-gradient(circle, #00000008 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Hide scrollbar but keep functionality (mobile UX) */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Mapbox Overrides ──────────────────────────────────────────── */
+/* Ensure map container fills parent in M2 Taswira module */
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Kenya-themed map popup styling */
+.mapboxgl-popup-content {
+  @apply rounded-card shadow-card p-3;
+  font-family: "Inter", sans-serif;
+}
