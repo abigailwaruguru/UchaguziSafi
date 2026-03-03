@@ -5,7 +5,7 @@ Stores metadata for evidence files attached to incidents.
 Supports the evidentiary requirements for IEBC complaint
 determination under ECF Act s.21(4)(b).
 
-EXIF metadata extraction from photos/videos provides:
+EXIT metadata extraction from photos/videos provides:
   - Timestamp verification (was the photo taken on the claimed date?)
   - GPS verification (was the photo taken at the claimed location?)
 These fields support the credibility assessment during review.
