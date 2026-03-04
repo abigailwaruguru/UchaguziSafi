@@ -26,19 +26,19 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 // ── Layout Components (loaded eagerly — small bundles) ──────────
-import Layout from "./components/Layout";
-import LoadingSpinner from "./components/LoadingSpinner";
+import Layout from "./components/layout/Layout";
+import LoadingSpinner from "./components/common/LoadingSpinner";
 
 // ── Page Components (code-split for mobile performance) ─────────
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const CandidateList = lazy(() => import("./pages/CandidateList"));
-const CandidateDetail = lazy(() => import("./pages/CandidateDetail"));
-const CountyMap = lazy(() => import("./pages/CountyMap"));
-const ReportIncident = lazy(() => import("./pages/ReportIncident"));
-const TrackIncident = lazy(() => import("./pages/TrackIncident"));
-const Search = lazy(() => import("./pages/Search"));
-const Alerts = lazy(() => import("./pages/Alerts"));
+const CandidateList = lazy(() => import("./pages/Dashboard/CandidatesPage"));
+const CandidateDetail = lazy(() => import("./pages/Dashboard/CandidateDetailPage"));
+const CountyMap = lazy(() => import("./pages/MapPage"));
+const ReportIncident = lazy(() => import("./pages/Incidents/ReportPage"));
+const TrackIncident = lazy(() => import("./pages/Incidents/TrackPage"));
+const Search = lazy(() => import("./pages/Search/ResultsPage"));
+const Alerts = lazy(() => import("./pages/Alerts/Alerts"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {

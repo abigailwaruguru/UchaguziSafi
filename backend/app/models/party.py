@@ -26,7 +26,7 @@ from app.models.base import BaseModel
 
 if TYPE_CHECKING:
     from app.models.candidate import Candidate
-    from backend.app.models.incident_status_history import Incident
+    from app.models.incident import Incident
 
 
 class PoliticalParty(BaseModel):

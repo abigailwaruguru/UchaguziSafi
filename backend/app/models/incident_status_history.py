@@ -21,10 +21,10 @@ from sqlalchemy.dialects.postgresql import ENUM, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import BaseModel
-from backend.app.models.incident_status_history import IncidentStatus
+from app.models.incident import IncidentStatus
 
 if TYPE_CHECKING:
-    from backend.app.models.incident_status_history import Incident
+    from app.models.incident import Incident
 
 
 class IncidentStatusHistory(BaseModel):

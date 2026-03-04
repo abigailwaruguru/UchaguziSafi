@@ -11,7 +11,7 @@ Module mapping:
   - M1 Fedha Dashboard: Summary cards and charts
 """
 
-from datetime import date
+import datetime as _dt
 from decimal import Decimal
 from typing import List, Optional
 
@@ -122,7 +122,7 @@ class TimelineDataPoint(BaseModel):
         }
     )
 
-    date: date = Field(
+    date: _dt.date = Field(
         description="Date of the data point.",
         examples=["2027-06-15"],
     )

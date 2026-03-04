@@ -1,7 +1,7 @@
 """
 UCHAGUZI SAFI — Alembic Migration Environment
 ==============================================
-Configures Alembic to use our async SQLAlchemy engine and
+Configures Alembic to use our SQLAlchemy engine and
 auto-detect schema changes across all campaign finance models.
 
 Run migrations:
@@ -9,29 +9,26 @@ Run migrations:
     alembic upgrade head
 """
 
-import asyncio
 from logging.config import fileConfig
 
 from alembic import context
-from sqlalchemy import pool
+from sqlalchemy import create_engine, pool
 from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.core.config import get_settings
-from app.core.database import Base
+from app.models.base import Base
 
 # ── Import ALL models so Alembic can detect them ─────────────────────
-# Uncomment each line as you create the corresponding model module.
 # These imports ensure the ORM metadata is populated before autogenerate.
 
-# from app.models.user import User                  # M6 Usimamizi
-# from app.models.candidate import Candidate        # M4 Tafuta
-# from app.models.political_party import PoliticalParty  # M4 Tafuta
-# from app.models.contribution import Contribution  # M1 Fedha
-# from app.models.expenditure import Expenditure    # M1 Fedha
-# from app.models.incident import Incident          # M3 Ripoti Ubadhirifu
-# from app.models.alert import Alert                # M5 Tahadhari
-# from app.models.expenditure_committee import ExpenditureCommittee  # ECF Act s.7-9
+from app.models.candidate import Candidate              # M4 Tafuta
+from app.models.party import PoliticalParty             # M4 Tafuta
+from app.models.contribution import Contribution        # M1 Fedha
+from app.models.expenditure import Expenditure          # M1 Fedha
+from app.models.incident import Incident                # M3 Ripoti Ubadhirifu
+from app.models.incident_status_history import IncidentStatusHistory
+from app.models.evidence import Evidence
+from app.models.spending_limit import SpendingLimit
 
 # ── Alembic Config ───────────────────────────────────────────────────
 config = context.config
@@ -70,7 +67,6 @@ def do_run_migrations(connection: Connection) -> None:
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
-        # compare_type detects column type changes (e.g., Integer → BigInteger)
         compare_type=True,
     )
 
@@ -78,27 +74,17 @@ def do_run_migrations(connection: Connection) -> None:
         context.run_migrations()
 
 
-async def run_async_migrations() -> None:
-    """
-    Create an async engine and run migrations.
-    We use the SYNC url here because Alembic's migration runner
-    is synchronous; asyncpg is only for the application runtime.
-    """
-    connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode with a live database."""
+    connectable = create_engine(
+        config.get_main_option("sqlalchemy.url"),
         poolclass=pool.NullPool,
     )
 
-    async with connectable.connect() as connection:
-        await connection.run_sync(do_run_migrations)
+    with connectable.connect() as connection:
+        do_run_migrations(connection)
 
-    await connectable.dispose()
-
-
-def run_migrations_online() -> None:
-    """Run migrations in 'online' mode with a live database."""
-    asyncio.run(run_async_migrations())
+    connectable.dispose()
 
 
 # ── Entry Point ──────────────────────────────────────────────────────

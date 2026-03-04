@@ -117,27 +117,27 @@ async def root():
 # Uncomment as modules are implemented during the hackathon sprint.
 
 # --- M6 Usimamizi: Auth & Admin (implement first — gates other modules) ---
-# from app.api.routes import auth
-# app.include_router(auth.router, prefix="/api/v1/auth", tags=["M6 Usimamizi — Auth"])
+from app.api.routes import auth
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["M6 Usimamizi — Auth"])
 
 # --- M1 Fedha Dashboard: Core campaign finance data ---
-# from app.api.routes import candidates
-# app.include_router(candidates.router, prefix="/api/v1/candidates", tags=["M4 Tafuta — Candidates"])
+from app.api.routes import candidates
+app.include_router(candidates.router, prefix="/api/v1/candidates", tags=["M4 Tafuta — Candidates"])
 
-# from app.api.routes import contributions
-# app.include_router(contributions.router, prefix="/api/v1/contributions", tags=["M1 Fedha — Contributions"])
+from app.api.routes import contributions
+app.include_router(contributions.router, prefix="/api/v1/contributions", tags=["M1 Fedha — Contributions"])
 
-# from app.api.routes import expenditures
-# app.include_router(expenditures.router, prefix="/api/v1/expenditures", tags=["M1 Fedha — Expenditures"])
+from app.api.routes import expenditures
+app.include_router(expenditures.router, prefix="/api/v1/expenditures", tags=["M1 Fedha — Expenditures"])
 
 # --- M3 Ripoti Ubadhirifu: Public resource misuse tracking ---
-# from app.api.routes import incidents
-# app.include_router(incidents.router, prefix="/api/v1/incidents", tags=["M3 Ripoti — Incidents"])
+from app.api.routes import incidents
+app.include_router(incidents.router, prefix="/api/v1/incidents", tags=["M3 Ripoti — Incidents"])
 
 # --- M2 Taswira: Data Visualisation aggregates ---
-# from app.api.routes import visualisation
-# app.include_router(visualisation.router, prefix="/api/v1/visualisation", tags=["M2 Taswira — Visualisation"])
+from app.api.routes import visualisation
+app.include_router(visualisation.router, prefix="/api/v1/visualisation", tags=["M2 Taswira — Visualisation"])
 
 # --- M5 Tahadhari: Alert System ---
-# from app.api.routes import alerts
-# app.include_router(alerts.router, prefix="/api/v1/alerts", tags=["M5 Tahadhari — Alerts"])
+from app.api.routes import alerts
+app.include_router(alerts.router, prefix="/api/v1/alerts", tags=["M5 Tahadhari — Alerts"])
