@@ -47,11 +47,11 @@ import {
 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
-import { useCandidate } from "../hooks/useCandidates";
-import useCandidateFinance from "../hooks/useCandidateFinance";
-import ComplianceIndicator from "../components/dashboard/ComplianceIndicator";
-import FinanceCard from "../components/dashboard/FinanceCard";
-import ShareButton from "../components/dashboard/ShareButton";
+import { useCandidate } from "../../hooks/useCandidates";
+import useCandidateFinance from "../../hooks/useCandidateFinance";
+import ComplianceIndicator from "../../components/dashboard/ComplianceIndicator";
+import FinanceCard from "../../components/dashboard/FinanceCard";
+import ShareButton from "../../components/dashboard/ShareButton";
 
 // ── Constants ───────────────────────────────────────────────────
 

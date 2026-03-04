@@ -36,9 +36,9 @@ import {
   SearchX,
   Shield,
 } from "lucide-react";
-import { useCandidates } from "../hooks/useCandidates";
-import CandidateCard from "../components/candidates/CandidateCard";
-import CandidateFilters from "../components/candidates/CandidateFilters";
+import { useCandidates } from "../../hooks/useCandidates";
+import CandidateCard from "../../components/candidates/CandidateCard";
+import CandidateFilters from "../../components/candidates/CandidateFilters";
 
 /** Default filter state */
 const DEFAULT_FILTERS = {

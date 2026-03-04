@@ -29,14 +29,14 @@ import {
   Send, Loader2,
 } from "lucide-react";
 
-import useIncidentReport from "../hooks/useIncidentReport";
-import StepIndicator from "../components/report/StepIndicator";
-import IncidentTypeStep from "../components/report/IncidentTypeStep";
-import DetailsStep from "../components/report/DetailsStep";
-import EvidenceStep from "../components/report/EvidenceStep";
-import ContactStep from "../components/report/ContactStep";
-import ReviewStep from "../components/report/ReviewStep";
-import SuccessModal from "../components/report/SuccessModal";
+import useIncidentReport from "../../hooks/useIncidentReport";
+import StepIndicator from "../../components/report/StepIndicator";
+import IncidentTypeStep from "../../components/report/IncidentTypeStep";
+import DetailsStep from "../../components/report/DetailsStep";
+import EvidenceStep from "../../components/report/EvidenceStep";
+import ContactStep from "../../components/report/ContactStep";
+import ReviewStep from "../../components/report/ReviewStep";
+import SuccessModal from "../../components/report/SuccessModal";
 
 export default function ReportPage() {
   const {
