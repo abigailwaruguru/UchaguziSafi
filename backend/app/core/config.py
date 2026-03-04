@@ -37,8 +37,8 @@ class Settings(BaseSettings):
     app_description: str = (
         "Campaign Finance Transparency Tool — Kenya 2027 Elections"
     )
-    debug: bool = True
-    environment: str = "development"
+    DEBUG: bool = False
+    environment: str = "production"
 
     # ── Database ─────────────────────────────────────────────────────
     database_url: str = (

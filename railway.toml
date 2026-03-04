@@ -19,3 +19,4 @@ restartPolicyMaxRetries = 3
 [build.args]
 # These are available during docker build
 NODE_ENV = "production"
+
