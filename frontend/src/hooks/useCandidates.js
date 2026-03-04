@@ -52,8 +52,13 @@ export function useCandidates(filters = {}) {
   return useQuery({
     queryKey: ["candidates", params],
     queryFn: async () => {
-      const response = await candidatesAPI.getAll(params);
-      return response.data;
+      try {
+        const response = await candidatesAPI.getAll(params);
+        return response.data;
+      } catch (err) {
+        console.error("Candidates fetch failed:", err);
+        throw err;
+      }
     },
     placeholderData: (previousData) => previousData,
     staleTime: 2 * 60 * 1000, // 2 minutes

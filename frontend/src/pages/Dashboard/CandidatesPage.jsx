@@ -55,7 +55,7 @@ export default function CandidatesPage() {
 
   const candidates = data?.items || [];
   const total = data?.total || 0;
-  const totalPages = data?.total_pages || 1;
+  const totalPages = data?.total_pages || data?.pages || 1;
   const currentPage = filters.page;
 
   const handleFilterChange = useCallback((newFilters) => {

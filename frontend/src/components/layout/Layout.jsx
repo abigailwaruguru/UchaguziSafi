@@ -51,7 +51,7 @@ const MOBILE_TABS = [
   { path: "/search", icon: Search, label: "Tafuta" },
 ];
 
-export default function Layout() {
+export default function Layout({ children }) {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const location = useLocation();
 
@@ -74,7 +74,7 @@ export default function Layout() {
       {/* ── Main Content ─────────────────────────────────────── */}
       <main className="flex-1 pb-20 md:pb-0">
         <div className="mx-auto max-w-7xl px-4 py-6 lg:px-6 lg:py-8">
-          <Outlet />
+          {children}
         </div>
       </main>
 

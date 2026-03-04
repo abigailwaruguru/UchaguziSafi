@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
     # Startup
     print(f"🇰🇪  {settings.app_name} v{settings.app_version} starting…")
     print(f"   Environment : {settings.environment}")
-    print(f"   Debug       : {settings.debug}")
+    print(f"   Debug       : {settings.DEBUG}")
     print(f"   ECF Act constants loaded:")
     print(f"     • Disclosure threshold : KES {settings.contribution_disclosure_threshold:,}")
     print(f"     • Single-source cap    : {settings.single_source_contribution_cap_percent}%")

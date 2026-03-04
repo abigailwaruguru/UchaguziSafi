@@ -25,7 +25,7 @@ settings = get_settings()
 # pool_pre_ping keeps connections healthy; echo=True in dev for SQL logging
 engine = create_async_engine(
     settings.database_url,
-    echo=settings.debug,
+    echo=settings.DEBUG,
     pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,
