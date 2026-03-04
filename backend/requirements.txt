@@ -1,0 +1,31 @@
+# =============================================================================
+# UCHAGUZI SAFI — Backend Python Dependencies
+# =============================================================================
+
+# --- Web framework & ASGI server ---
+fastapi>=0.115.0,<0.116.0
+uvicorn[standard]>=0.32.0,<0.34.0
+
+# --- Database (async SQLAlchemy 2.0 + PostgreSQL) ---
+sqlalchemy[asyncio]>=2.0.36,<2.1.0
+asyncpg>=0.30.0                   # async PostgreSQL driver (runtime)
+psycopg2-binary>=2.9.10           # sync PostgreSQL driver (Alembic migrations only)
+alembic>=1.14.0,<2.0.0
+
+# --- Pydantic v2 & settings ---
+pydantic>=2.10.0,<3.0.0
+pydantic-settings>=2.6.0,<3.0.0
+
+# --- Authentication (JWT) ---
+python-jose[cryptography]>=3.3.0,<4.0.0
+passlib[bcrypt]>=1.7.4,<2.0.0
+
+# --- File uploads & async I/O ---
+python-multipart>=0.0.20          # Form data / file uploads (FastAPI dependency)
+aiofiles>=24.1.0                  # Async file writes for evidence storage
+
+# --- Image metadata extraction (EXIF — ECF Act s.21 evidence credibility) ---
+Pillow>=11.0.0                    # Used in incidents.py _extract_exif()
+
+# --- Utilities ---
+python-dateutil>=2.9.0            # Flexible date parsing for incident reports
