@@ -1,0 +1,50 @@
+# =============================================================================
+# UCHAGUZI SAFI — Docker Ignore
+# Keeps the build context small and secure.
+# =============================================================================
+
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.mypy_cache
+backend/venv
+backend/.venv
+
+# Node
+frontend/node_modules
+frontend/.cache
+
+# Environment files (secrets!)
+.env
+.env.local
+.env.production
+backend/.env
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (not needed in image)
+*.docx
+*.pdf
+*.pptx
+*.md
+
+# Uploads (mounted as volume)
+uploads/
+
+# Docker
+docker-compose*.yml
+Dockerfile.dev

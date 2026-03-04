@@ -1,0 +1,21 @@
+# =============================================================================
+# UCHAGUZI SAFI — Railway Deployment Configuration
+# Campaign Finance Transparency Tool — Kenya 2027 Elections
+# =============================================================================
+
+[build]
+# Railway uses the root Dockerfile for multi-stage build
+builder = "dockerfile"
+dockerfilePath = "./Dockerfile"
+
+[deploy]
+# Railway injects PORT automatically
+startCommand = "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2 --log-level info"
+healthcheckPath = "/health"
+healthcheckTimeout = 5
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[build.args]
+# These are available during docker build
+NODE_ENV = "production"

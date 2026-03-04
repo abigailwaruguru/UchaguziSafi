@@ -1,0 +1,81 @@
+# =============================================================================
+# UCHAGUZI SAFI — Docker Compose (Local Development)
+# Starts all services with hot-reload for the hackathon sprint.
+# =============================================================================
+
+services:
+  # ── PostgreSQL Database ────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: uchaguzi-db
+    environment:
+      POSTGRES_DB: uchaguzi_safi
+      POSTGRES_USER: uchaguzi
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-uchaguzi_dev_2027}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uchaguzi -d uchaguzi_safi"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ── Redis (Optional — for caching/rate limiting) ───────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: uchaguzi-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ── FastAPI Backend ────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.dev
+    container_name: uchaguzi-backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://uchaguzi:${DB_PASSWORD:-uchaguzi_dev_2027}@postgres:5432/uchaguzi_safi
+      DATABASE_URL_SYNC: postgresql://uchaguzi:${DB_PASSWORD:-uchaguzi_dev_2027}@postgres:5432/uchaguzi_safi
+      ENVIRONMENT: development
+      DEBUG: "true"
+      SECRET_KEY: dev-secret-key-not-for-production
+      ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5173
+      LOG_LEVEL: debug
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # ── React Frontend (Dev Server) ────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.dev
+    container_name: uchaguzi-frontend
+    environment:
+      VITE_API_URL: http://localhost:8000/api/v1
+      VITE_MAPBOX_TOKEN: ${MAPBOX_TOKEN:-}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
